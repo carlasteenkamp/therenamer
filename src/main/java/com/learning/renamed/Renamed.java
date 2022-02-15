@@ -9,17 +9,37 @@ public class Renamed
 {
     public static void main(String[] args) throws IOException
     {
-        File file = new File("c:\\Users\\carla.steenkamp\\renameFiles\\one.java");
 
-        File rename = new File("c:\\Users\\<yourUsername>\\renameFiles\\two.java");
+        File file = new File("c:\\Users\\<username>\\learning\\Series\\Season\\one.java");
+        File fileTwo = new File("c:\\Users\\<username>\\learning\\Series");
 
-        boolean flag = file.renameTo(rename);
+        File rename = new File("c:\\Users\\<username>\\learning\\Series\\two.java");
 
-        if (flag)
+
+        boolean tvShow = file.getPath().contains("Season");
+        boolean movies = file.getPath().contains("Movies");
+
+        if (file.exists())
         {
-            Files.move(Path.of("c:\\Users\\<yourUsername>\\renameFiles\\two.java"), rename.toPath().resolveSibling(
-                    "c:\\Users\\<yourUsername>\\completedRenameFiles\\two.java"));
-            System.out.println("File Successfully Renamed and moved");
+            PrintTree.printTree(3, fileTwo);
+            boolean flag = file.renameTo(rename);
+            if (tvShow && flag)
+            {
+                Files.move(Path.of("c:\\Users\\<username>\\learning\\series\\two.java"),
+                        rename.toPath().resolveSibling(
+                                "c:\\Users\\<username>\\learning\\completedSeries\\two.java"));
+                System.out.println("File Successfully Renamed and moved to series");
+            }
+            else if (movies && flag)
+            {
+                Files.move(Path.of("c:\\Users\\<username>\\movies\\two.java"), rename.toPath().resolveSibling(
+                        "c:\\Users\\<username>\\completedMovies\\two.java"));
+                System.out.println("File Successfully Renamed and moved to movies");
+            }
+            else
+            {
+                System.out.println("Operation Failed couldn't be moved");
+            }
         }
         else
         {
